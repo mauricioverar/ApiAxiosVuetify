@@ -2,24 +2,41 @@
   <div>
     <h3>ordenes2</h3>
     <div>
-      <Monitor :dOrdenes="dOrdenes" />
-      <!-- repite iteraciones dentro de la pagina (Ultimas) -->
+      <Tabla :datos="dOrdenes" :headers="headers" />
     </div>
   </div>
 </template>
 
 <script>
-import Monitor from '@/components/Monitor'
+import Tabla from '@/components/Tabla'
+
 import { mapState } from 'vuex'
 
 export default {
   name: 'Ordenes',
 
   components: {
-    Monitor
+    Tabla
   },
 
-  setup() {},
+  data () {
+    return {
+      headers: [
+        {
+          text: 'num_orden',
+          align: 'start',
+          sortable: false,
+          value: 'num_orden',
+        },
+        { text: 'cliente', value: 'cliente' },
+        { text: 'monto', value: 'monto' },
+        { text: 'cant_productos', value: 'cant_productos' },
+        { text: 'fecha_entrega', value: 'fecha_entrega' },
+        { text: 'avance_preparacion', value: 'avance_preparacion' },
+        { text: 'estado', value: 'estado' }
+      ],
+    }
+  },
 
   computed: {
     ...mapState(['dOrdenes']) // definido como props
